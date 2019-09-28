@@ -11,6 +11,6 @@ class League extends Model
     //return team
     public function team()
     {
-        return $this->hasOne(Team::class,'team_id','id');
+        return $this->hasOne(\App\Team::class,'id','team_id');
     }
 }

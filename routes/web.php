@@ -1,2 +1,15 @@
 <?php
-Route::get('/', "HomeController@index");
+
+Route::get('/teams', "TeamController@index");
+
+Route::get('/match', "MatchController@index");
+Route::get('/match/{week}', "MatchController@index");
+
+Route::get('/league', "ResultController@index");
+Route::get('/week/{week}', "MatchController@index");
+Route::get('/prediction', "ResultController@Prediction");
+Route::get('/reset', "ResultController@reset");
+
+Route::get('/grid', "TeamController@grid");
+
+
