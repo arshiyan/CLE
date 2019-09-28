@@ -1,0 +1,1 @@
+<?phpreturn [	'login' => 'ورود',	'email' => 'ایمیل',	'password' => 'رمزعبور',	'forget_password' => 'رمز خود را فراموش کرده اید؟',	'remember' => 'به خاطر سپاری رمز عبور',];

@@ -1,0 +1,85 @@
+[
+  {
+    "name": "id",
+    "dbType": "increments",
+    "htmlType": "",
+    "validations": "",
+    "searchable": false,
+    "fillable": false,
+    "primary": true,
+    "inForm": false,
+    "inIndex": false
+  },
+  {
+    "name": "name",
+    "dbType": "string,50",
+    "htmlType": "text",
+    "validations": "",
+    "searchable": true,
+    "fillable": true,
+    "primary": false,
+    "inForm": true,
+    "inIndex": true
+  },
+  {
+"name": "post_url",
+"dbType": "string,500",
+"htmlType": "text",
+"validations": "",
+"searchable": false,
+"fillable": true,
+"primary": false,
+"inForm": true,
+"inIndex": false
+},
+  {
+    "name": "post_id",
+    "dbType": "integer",
+    "htmlType": "",
+    "validations": "",
+    "searchable": false,
+    "fillable": false,
+    "primary": false,
+    "inForm": false,
+    "inIndex": false
+  },
+  {
+    "name": "total_winner",
+    "dbType": "integer",
+    "htmlType": "",
+    "validations": "",
+    "searchable": false,
+    "fillable": false,
+    "primary": false,
+    "inForm": true,
+    "inIndex": true
+  },
+  {
+    "name": "status",
+    "dbType": "string",
+    "htmlType": "select,Pending,Running,Done,Expired",
+    "searchable": true
+  },
+  {
+    "name": "created_at",
+    "dbType": "timestamp",
+    "htmlType": "",
+    "validations": "",
+    "searchable": false,
+    "fillable": false,
+    "primary": false,
+    "inForm": false,
+    "inIndex": false
+  },
+  {
+    "name": "updated_at",
+    "dbType": "timestamp",
+    "htmlType": "",
+    "validations": "",
+    "searchable": false,
+    "fillable": false,
+    "primary": false,
+    "inForm": false,
+    "inIndex": false
+  }
+  ]
