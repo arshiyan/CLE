@@ -23,8 +23,9 @@ class MatchController extends Controller
         $matches = $this->makeLeague();
 
         foreach ($matches as $week => $contests) {
-            if ($week == $weekindex) {
 
+            if($weekindex ==1)
+            {
                 foreach ($contests as $matchup) {
 
 
@@ -55,7 +56,45 @@ class MatchController extends Controller
 
 
                 }
+
             }
+            else
+            {
+                if ($week == $weekindex) {
+
+                    foreach ($contests as $matchup) {
+
+
+                        $resultMatch = $this->makeMatch($matchup['home'], $matchup['away']);
+
+
+                        if ($resultMatch['draw'] == 1) {
+
+                            Match::create([
+                                    "winner_team_id" => $matchup['away'],
+                                    "lost_team_id" => $matchup['home'],
+                                    "result" => $resultMatch['result'],
+                                    "week" => $week
+                                ]
+
+
+                            );
+                        } else {
+                            Match::create([
+                                    "winner_team_id" => $resultMatch['winner'],
+                                    "lost_team_id" => $resultMatch['lose'],
+                                    "result" => $resultMatch['result'],
+                                    "week" => $week
+                                ]
+
+                            );
+                        }
+
+
+                    }
+                }
+            }
+
 
         }
 
@@ -90,7 +129,7 @@ class MatchController extends Controller
 
         //team1 is win
         if (($team1_goalNumber - $team2_goalNumber) > 0) {
-            $team1info->point = $team1_goalNumber +3;
+            $team1info->point += 3;
             $team1info->win += 1;
             $team2info->lose += 1;
 
@@ -103,15 +142,15 @@ class MatchController extends Controller
 
         } //draw
         elseif (($team1_goalNumber - $team2_goalNumber) == 0) {
-            $team1info->point = $team1_goalNumber +1;
-            $team2info->point = $team2_goalNumber +1;
+            $team1info->point += 1;
+            $team2info->point += 1;
             $team1info->draw += 1;
             $team2info->draw += 1;
             $win_lose['draw'] = 1;
             $win_lose['result'] = $result;
         } //team2 is win
         else {
-            $team2info->point = $team2_goalNumber +3;
+            $team2info->point += 3;
             $team2info->win += 1;
             $team1info->lose += 1;
 
@@ -124,6 +163,7 @@ class MatchController extends Controller
 
         //global var
         $team1info->play += 1;
+        $team2info->play += 1;
         $team1info->gd = $team1info->gd + $team1_goalNumber;
         $team2info->gd = $team2info->gd + $team2_goalNumber;
 

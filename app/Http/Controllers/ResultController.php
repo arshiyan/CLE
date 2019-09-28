@@ -23,6 +23,14 @@ class ResultController extends Controller
         return Response::json($results);
     }
 
+    public function allWeek()
+    {
+        //$this->reset();
+        $results = League::with('team')->get();
+
+        return Response::json($results);
+    }
+
     public function Week()
     {
 
@@ -34,17 +42,32 @@ class ResultController extends Controller
     public function Prediction()
     {
         $total = League::sum('point');
-
-        $teams = Team::all();
-
-        foreach ($teams as $team)
+        $leagues = League::all();
+        foreach ($leagues as $league)
         {
-            if($total <=0) $total=1;
-            $pre =($team->power/$total) * 100;
-            //dd($total);
-            $team->power = $pre;
+            $per = ($league->point/$total);
+            $team = Team::find($league->team_id);
+            $team->power = round($per*100,2);
             $team->save();
         }
+        /*      $teams = Team::all();
+
+              foreach ($teams as $team)
+              {
+                  if($total <=0)
+                  {
+                      $total=1;
+                      $pre =($team->power/$total);
+                  }
+                  else
+                  {
+                      $pre =($team->power/$total) * 100;
+                  }
+
+                  //dd($total);
+                  $team->power = $pre;
+                  $team->save();
+              }*/
         $teams = Team::all();
         return Response::json($teams);
     }
@@ -83,7 +106,7 @@ class ResultController extends Controller
             [
                 "team_id"=>1,
                 "point"=>10,
-                "play"=>2,
+                "play"=>4,
                 "win"=>3,
                 "lose"=>0,
                 "draw"=>1,
