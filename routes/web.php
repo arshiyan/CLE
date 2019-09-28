@@ -11,5 +11,6 @@ Route::get('/prediction', "ResultController@Prediction");
 Route::get('/reset', "ResultController@reset");
 
 Route::get('/grid', "TeamController@grid");
+Route::get('/', "TeamController@grid");
 
 

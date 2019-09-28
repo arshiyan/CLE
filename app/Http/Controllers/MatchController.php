@@ -30,7 +30,7 @@ class MatchController extends Controller
 
                     $resultMatch = $this->makeMatch($matchup['home'], $matchup['away']);
 
-                    
+
                     if ($resultMatch['draw'] == 1) {
 
                         Match::create([
@@ -90,7 +90,7 @@ class MatchController extends Controller
 
         //team1 is win
         if (($team1_goalNumber - $team2_goalNumber) > 0) {
-            $team1info->point += $team1_goalNumber;
+            $team1info->point = $team1_goalNumber +3;
             $team1info->win += 1;
             $team2info->lose += 1;
 
@@ -103,13 +103,15 @@ class MatchController extends Controller
 
         } //draw
         elseif (($team1_goalNumber - $team2_goalNumber) == 0) {
+            $team1info->point = $team1_goalNumber +1;
+            $team2info->point = $team2_goalNumber +1;
             $team1info->draw += 1;
             $team2info->draw += 1;
             $win_lose['draw'] = 1;
             $win_lose['result'] = $result;
         } //team2 is win
         else {
-            $team2info->point += $team2_goalNumber;
+            $team2info->point = $team2_goalNumber +3;
             $team2info->win += 1;
             $team1info->lose += 1;
 

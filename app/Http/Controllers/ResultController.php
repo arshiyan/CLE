@@ -39,8 +39,9 @@ class ResultController extends Controller
 
         foreach ($teams as $team)
         {
+            if($total <=0) $total=1;
             $pre =($team->power/$total) * 100;
-            dd($total);
+            //dd($total);
             $team->power = $pre;
             $team->save();
         }

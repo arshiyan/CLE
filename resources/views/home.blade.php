@@ -37,7 +37,7 @@
         <div class="col-md-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="text-center" id="#weekNo">  Week Match Result </h4>
+                    <h4 class="text-center" > <span id="weekNo1"></span>th Week Match Result </h4>
                 </div>
                 <div class="panel-body text-center">
                     <div id="week">
@@ -54,7 +54,7 @@
     <div class="col-md-4">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h4 class="text-center" id="#predictionNo">0th Week Prediction of Championship <span class="fa fa-edit pull-right bigicon"></span></h4>
+                <h4 class="text-center" id="#predictionNo"><span id="weekNo2"></span>thth Week Prediction of Championship <span class="fa fa-edit pull-right bigicon"></span></h4>
             </div>
             <div class="panel-body text-center">
                 <div id="prediction"></div>
@@ -62,6 +62,8 @@
         </div>
     </div>
 
+    <botton class="btn btn-default pull-right" onclick="nextweek()">Next week</botton>
+    <botton class="btn btn-default pull-left" onclick="allweek()">All week</botton>
 </div>
 
 <script type="text/javascript">
@@ -77,7 +79,7 @@
                 url:"league",
                 dataType: "json",
                 beforeSend: function() {
-                    //$('#response').html("<img src='/images/Preloader_2.gif' />");
+
                 },
                 success: function (data) {
 
@@ -101,6 +103,34 @@
         }
 
 
+
+
+        function getPrediction()
+        {
+            $.ajax({
+                type: "GET",
+                url:"prediction",
+                dataType: "json",
+                beforeSend: function() {
+
+                },
+                success: function (data) {
+
+                    $.each(data,function(i,obj)
+                    {
+
+                        var prediction = '<div class="row"><div class="col-md-9">'+obj.name +'</div>\n' +
+                            '                    <div class="col-md-4">'+obj.power +'</div></div>';
+                        console.log(prediction);
+
+                        $('#prediction').append(prediction);
+
+                    });
+
+                }
+            });
+        }
+
         function getResut()
         {
             $.ajax({
@@ -108,7 +138,7 @@
                 url:"week/4",
                 dataType: "json",
                 beforeSend: function() {
-                    //$('#response').html("<img src='/images/Preloader_2.gif' />");
+
                 },
                 success: function (data) {
 
@@ -120,39 +150,65 @@
                         console.log(week);
 
                         $('#week').append(week);
-
-                    });
-
-                }
-            });
-        }
-
-        function getPrediction()
-        {
-            $.ajax({
-                type: "GET",
-                url:"prediction",
-                dataType: "json",
-                beforeSend: function() {
-                    //$('#response').html("<img src='/images/Preloader_2.gif' />");
-                },
-                success: function (data) {
-
-                    $.each(data,function(i,obj)
-                    {
-
-                        var prediction = '<div class="row"><div class="col-md-9">'+obj.name +'</div>\n' +
-                            '                    <div class="col-md-4">'+obj.power +'</div></div>';
-                        console.log(week);
-
-                        $('#prediction').append(prediction);
-
+                        $('#weekNo1').html(obj.week);
+                        $('#weekNo2').html(obj.week);
                     });
 
                 }
             });
         }
     });
+
+    function nextweek()
+    {
+        $.ajax({
+            type: "GET",
+            url:"week/5",
+            dataType: "json",
+            beforeSend: function() {
+
+            },
+            success: function (data) {
+
+                $.each(data,function(i,obj)
+                {
+                    console.log(obj);
+                    var week = '<div class="row"><div class="col-md-5">'+obj.winner_team.name +'</div>\n' +
+                        '                   <div class="col-md-2">'+obj.result +'</div> <div class="col-md-5">'+obj.lose_team.name +'</div></div>';
+                    console.log(week);
+
+                    $('#week').append(week);
+
+                });
+
+            }
+        });
+    }
+    function allweek()
+    {
+        $.ajax({
+            type: "GET",
+            url:"week/1",
+            dataType: "json",
+            beforeSend: function() {
+
+            },
+            success: function (data) {
+
+                $.each(data,function(i,obj)
+                {
+                    console.log(obj);
+                    var week = '<div class="row"><div class="col-md-5">'+obj.winner_team.name +'</div>\n' +
+                        '                   <div class="col-md-2">'+obj.result +'</div> <div class="col-md-5">'+obj.lose_team.name +'</div></div>';
+                    console.log(week);
+
+                    $('#week').append(week);
+
+                });
+
+            }
+        });
+    }
 </script>
 
 <style type="text/css">
