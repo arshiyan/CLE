@@ -13,7 +13,7 @@ To install the CLE you should take a clone from the repository:
 
 go to project with cd
 
-`cd memberShipLumen `
+`cd CLE `
 
 install packages with composer
 
@@ -42,14 +42,6 @@ ok. done!!!
 To serve your project:
 
 `php -S localhost:8000 -t public`
-
-## Packages
-
-- [JWT](https://github.com/tymondesigns/jwt-auth "JWT")
-- [Lumen Generator](https://github.com/flipboxstudio/lumen-generator "Lumen Generator")
-- [Guzzle, PHP HTTP client](https://github.com/guzzle/guzzle "Guzzle, PHP HTTP client")
-- [phpunit](https://github.com/sebastianbergmann/phpunit "phpunit")
-
 
 ## routes
 
